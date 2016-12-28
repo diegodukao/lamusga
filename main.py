@@ -1,12 +1,9 @@
 from kivy.app import App
-from kivy.lang import Builder
-
-
-Builder.load_file('ui.kv')
+from kivymd.theming import ThemeManager
 
 
 class Lamusga(App):
-    pass
+    theme_cls = ThemeManager()
 
 
 if __name__ == "__main__":
