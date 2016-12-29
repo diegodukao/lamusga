@@ -16,10 +16,13 @@ BoxLayout:
 
     ScreenManager:
         id: scr_mngr
-        Screen:
-            name: 'player'
-            MDFloatingActionButton:
-                id: float_act_btn
-                icon: 'play'
-                elevation_normal: 2
-                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        Player:
+
+<Player>
+    name: 'player'
+    MDFloatingActionButton:
+        id: float_act_btn
+        icon: 'play'
+        elevation_normal: 2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        on_press: root.play()
