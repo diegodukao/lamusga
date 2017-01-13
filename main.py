@@ -9,8 +9,15 @@ class Player(Screen):
     playing = ObjectProperty()
 
     def play(self):
-        self.playing = SoundLoader.load('music.mp3')
-        self.playing.play()
+        try:
+            state = self.playing.state
+        # tests missing
+        except AttributeError:
+            state = "stop"
+
+        if state == "stop":
+            self.playing = SoundLoader.load('music.mp3')
+            self.playing.play()
 
     def stop(self):
         self.playing.stop()
