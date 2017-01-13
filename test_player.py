@@ -4,7 +4,7 @@ from main import Player
 
 
 @patch('main.SoundLoader.load')
-def test_play_method_calls_soundloader_play(mock_load):
+def test_play_method_loads_music_and_play_it(mock_load):
     player = Player()
     player.play()
 
