@@ -2,10 +2,10 @@
     name: 'player'
     MDFloatingActionButton:
         id: play_btn
-        icon: 'play'
+        icon: 'play' if root.state == 'stop' else 'pause'
         elevation_normal: 2
         pos_hint: {'center_x': 0.5, 'center_y': 0.2}
-        on_press: root.play()
+        on_press: root.play_pause()
     MDFloatingActionButton:
         id: stop_btn
         icon: 'stop'

@@ -1,6 +1,6 @@
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.screenmanager import Screen
 
 Builder.load_file('ui/player.kv')
@@ -8,17 +8,23 @@ Builder.load_file('ui/player.kv')
 
 class Player(Screen):
     playing = ObjectProperty()
+    state = StringProperty("stop")
 
-    def play(self):
+    def play_pause(self):
         try:
-            state = self.playing.state
-        # tests missing
+            self.state = self.playing.state
         except AttributeError:
-            state = "stop"
+            self.state = "stop"
 
-        if state == "stop":
+        if self.state == "stop":
             self.playing = SoundLoader.load('music.mp3')
-            # self.playing.play()
+            self.playing.volume = 0
+            self.playing.play()
+            self.state = "play"
+        else:
+            self.playing.stop()
+            self.state = "stop"
 
     def stop(self):
         self.playing.stop()
+        self.state = "stop"
