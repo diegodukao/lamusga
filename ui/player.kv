@@ -1,0 +1,14 @@
+<Player>:
+    name: 'player'
+    MDFloatingActionButton:
+        id: play_btn
+        icon: 'play'
+        elevation_normal: 2
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        on_press: root.play()
+    MDFloatingActionButton:
+        id: stop_btn
+        icon: 'stop'
+        elevation_normal: 2
+        pos_hint: {'center_x': 0.3, 'center_y': 0.2}
+        on_press: root.stop()
