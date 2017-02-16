@@ -1,6 +1,6 @@
 from kivy.core.audio import SoundLoader
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, StringProperty, NumericProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
@@ -16,6 +16,7 @@ class FileDialog(FloatLayout):
 class Player(Screen):
     playing = ObjectProperty()
     state = StringProperty("stop")
+    seek = NumericProperty(0)
 
     def play_pause(self):
         try:
@@ -25,15 +26,17 @@ class Player(Screen):
 
         if self.state == "stop":
             self.playing.play()
+            self.playing.seek(self.seek)
             self.state = "play"
         else:
+            self.seek = self.playing.get_pos()
             self.playing.stop()
             self.state = "stop"
 
     def play(self, filepath):
         self.playing = SoundLoader.load(filepath)
         self.playing.bind(on_stop=self.on_stop_callback)
-        self.playing.volume = 0.1
+        # self.playing.volume = 0.1
         self.playing.play()
         self.state = "play"
 
