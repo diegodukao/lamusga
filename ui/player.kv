@@ -4,11 +4,31 @@
         id: play_btn
         icon: 'play' if root.state == 'stop' else 'pause'
         elevation_normal: 2
-        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        pos_hint: {'center_x': 0.3, 'center_y': 0.2}
         on_press: root.play_pause()
     MDFloatingActionButton:
-        id: stop_btn
-        icon: 'stop'
+        id: file_btn
+        icon: 'folder'
         elevation_normal: 2
-        pos_hint: {'center_x': 0.3, 'center_y': 0.2}
-        on_press: root.stop()
+        pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+        on_press: root.open_file_dialog()
+
+
+<FileDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)
